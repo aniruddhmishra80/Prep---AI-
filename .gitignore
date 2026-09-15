@@ -1,0 +1,21 @@
+# never commit these
+.env
+venv/
+.venv/
+env/
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# runtime data
+data/uploads/*
+data/chroma/*
+data/*.db
+!data/uploads/.gitkeep
+!data/chroma/.gitkeep
+
+# editors / os
+.vscode/
+.idea/
+.DS_Store
+.cph/

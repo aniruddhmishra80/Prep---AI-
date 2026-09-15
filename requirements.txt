@@ -1,0 +1,35 @@
+# ---- api ----
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+python-multipart==0.0.20
+pydantic==2.10.4
+python-dotenv==1.0.1
+
+# ---- langchain ----
+langchain==0.3.14
+langchain-core==0.3.29
+langchain-community==0.3.14
+langchain-text-splitters==0.3.5
+langchain-mistralai==0.2.4
+langchain-google-genai==2.0.8
+langchain-huggingface==0.1.2
+langchain-ollama==0.2.2
+langchain-chroma==0.2.0
+
+# ---- rag ----
+chromadb==0.5.23
+sentence-transformers==3.3.1
+pypdf==5.1.0
+numpy==2.2.1
+
+# ---- frontend ----
+streamlit==1.41.1
+requests==2.32.3
+
+# ---- voice (optional: skip these if you only want text mode) ----
+SpeechRecognition==3.12.0
+PyAudio==0.2.14
+faster-whisper==1.1.1      # local speech to text, no api key
+gTTS==2.5.4                # natural sounding text to speech
+pygame==2.6.1              # plays the mp3 gTTS produces
+pyttsx3==2.98              # offline tts fallback

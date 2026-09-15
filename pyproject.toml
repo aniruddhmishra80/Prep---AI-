@@ -1,0 +1,5 @@
+[project]
+name = "ai-voice-interview-platform"
+version = "1.0.0"
+description = "Resume + JD aware adaptive AI interviewer with three-signal answer scoring"
+requires-python = ">=3.10"
