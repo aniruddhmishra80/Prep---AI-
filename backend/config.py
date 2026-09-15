@@ -14,10 +14,13 @@ load_dotenv()
 
 # ---------------------------------------------------------------- paths
 BASE_DIR = Path(__file__).resolve().parent.parent
-DATA_DIR = BASE_DIR / "data"
+
+# On Vercel / serverless only /tmp is writable. Locally, use the data/ folder.
+_default_data_dir = "/tmp" if os.getenv("VERCEL") else str(BASE_DIR / "data")
+DATA_DIR = Path(os.getenv("DATA_DIR", _default_data_dir))
 UPLOAD_DIR = DATA_DIR / "uploads"
 CHROMA_DIR = DATA_DIR / "chroma"
-DB_PATH = DATA_DIR / "interview.db"
+DB_PATH = Path(os.getenv("DB_PATH", str(DATA_DIR / "interview.db")))
 
 for _dir in (UPLOAD_DIR, CHROMA_DIR):
     _dir.mkdir(parents=True, exist_ok=True)
@@ -62,3 +65,7 @@ WEIGHT_LLM = 0.50
 
 # ---------------------------------------------------------------- api
 API_URL = os.getenv("API_URL", "http://127.0.0.1:8000")
+
+# Comma-separated list of allowed CORS origins, e.g. https://myapp.vercel.app
+# "*" means all origins - safe for a public API, change if you need auth cookies.
+CORS_ORIGINS = os.getenv("CORS_ORIGINS", "*")

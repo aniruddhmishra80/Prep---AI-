@@ -34,12 +34,12 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-# Streamlit runs on port 8501, the API on 8000, so the browser needs CORS.
-# Locked to localhost rather than "*" - "*" is fine on a laptop and wrong anywhere else.
+# Allow any origin listed in CORS_ORIGINS env var (defaults to "*" for open APIs).
+_origins = [o.strip() for o in config.CORS_ORIGINS.split(",") if o.strip()]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:8501", "http://127.0.0.1:8501"],
-    allow_credentials=True,
+    allow_origins=_origins,
+    allow_credentials="*" not in _origins,  # credentials not compatible with wildcard
     allow_methods=["*"],
     allow_headers=["*"],
 )

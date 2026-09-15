@@ -26,10 +26,12 @@ numpy==2.2.1
 streamlit==1.41.1
 requests==2.32.3
 
-# ---- voice (optional: skip these if you only want text mode) ----
+# ---- voice (local only - not installed on Vercel) ----
+# PyAudio and pygame require system-level C libs not available on serverless.
+# Uncomment these only when running locally:
+# PyAudio==0.2.14
+# faster-whisper==1.1.1
+# pygame==2.6.1
+# pyttsx3==2.98
 SpeechRecognition==3.12.0
-PyAudio==0.2.14
-faster-whisper==1.1.1      # local speech to text, no api key
-gTTS==2.5.4                # natural sounding text to speech
-pygame==2.6.1              # plays the mp3 gTTS produces
-pyttsx3==2.98              # offline tts fallback
+gTTS==2.5.4
