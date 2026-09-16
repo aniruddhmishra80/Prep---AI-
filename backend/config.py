@@ -44,7 +44,7 @@ GOOGLE_EMBEDDING_MODEL = os.getenv("GOOGLE_EMBEDDING_MODEL", "models/text-embedd
 
 # 0.0 makes questions repetitive, 1.0 makes the model drift off-format and break
 # the JSON contract. 0.4 is the compromise.
-TEMPERATURE = float(os.getenv("TEMPERATURE", "0.4"))
+TEMPERATURE = float(os.getenv("TEMPERATURE", "").strip() or "0.4")
 
 # ---------------------------------------------------------------- rag
 CHUNK_SIZE = 500
@@ -52,7 +52,7 @@ CHUNK_OVERLAP = 50      # so an idea cut at a boundary survives whole in one chu
 RETRIEVE_K = 4
 
 # ---------------------------------------------------------------- interview
-MAX_QUESTIONS = int(os.getenv("MAX_QUESTIONS", "8"))
+MAX_QUESTIONS = int(os.getenv("MAX_QUESTIONS", "").strip() or "8")
 DIFFICULTY_LEVELS = ["easy", "medium", "hard"]
 START_DIFFICULTY = 1                 # index into DIFFICULTY_LEVELS -> "medium"
 LEVEL_UP_AT = 0.75                   # score above this -> harder next question
