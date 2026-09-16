@@ -6,15 +6,17 @@ services:
     plan: free
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn backend.main:app --host 0.0.0.0 --port $PORT
+    # Note: free tier has ephemeral disk — SQLite + Chroma survive while the
+    # process is up but are wiped on restart/redeploy. One sitting = one interview.
     envVars:
       - key: PYTHON_VERSION
-        value: 3.12.0
+        value: "3.12.0"
       - key: LLM_PROVIDER
-        sync: false
+        value: google
       - key: GOOGLE_API_KEY
-        sync: false
+        sync: false          # paste this in the Render dashboard, never in the file
       - key: EMBEDDING_PROVIDER
-        sync: false
+        value: google        # avoids downloading 80MB sentence-transformers on boot
       - key: GOOGLE_MODEL
         value: gemini-2.0-flash
       - key: GOOGLE_EMBEDDING_MODEL
@@ -23,5 +25,5 @@ services:
         value: "0.4"
       - key: MAX_QUESTIONS
         value: "8"
-      - key: VERCEL
-        value: "1"
+      - key: CORS_ORIGINS
+        value: "*"           # Streamlit Cloud calls the API server-side, not via browser
