@@ -69,12 +69,20 @@ def get_embeddings():
     Default is local (all-MiniLM-L6-v2, ~80MB, 384 dimensions). Embeddings run
     on every answer we score, so an API round-trip there would be the latency
     bottleneck and would cost money per call.
+
+    On Vercel, set EMBEDDING_PROVIDER=google to avoid the 80MB download.
     """
     if config.EMBEDDING_PROVIDER == "google":
         from langchain_google_genai import GoogleGenerativeAIEmbeddings
 
         return GoogleGenerativeAIEmbeddings(model=config.GOOGLE_EMBEDDING_MODEL)
 
-    from langchain_huggingface import HuggingFaceEmbeddings
-
-    return HuggingFaceEmbeddings(model_name=config.LOCAL_EMBEDDING_MODEL)
+    # Local sentence-transformers — only works when the package is installed.
+    # Not available on Vercel (requires C++ native libs).
+    try:
+        from langchain_huggingface import HuggingFaceEmbeddings
+        return HuggingFaceEmbeddings(model_name=config.LOCAL_EMBEDDING_MODEL)
+    except ImportError:
+        # Fallback to Google embeddings if local model is unavailable
+        from langchain_google_genai import GoogleGenerativeAIEmbeddings
+        return GoogleGenerativeAIEmbeddings(model=config.GOOGLE_EMBEDDING_MODEL)
