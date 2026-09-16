@@ -1,24 +1,23 @@
 # ---- api ----
-fastapi==0.115.6
-uvicorn[standard]==0.34.0
-python-multipart==0.0.20
-pydantic==2.10.4
-python-dotenv==1.0.1
+fastapi==0.141.1
+uvicorn[standard]==0.53.0
+python-multipart==0.0.32
+pydantic==2.13.5
+python-dotenv==1.2.3
 
 # ---- langchain (cloud providers only, no ollama/huggingface local models) ----
-langchain==0.3.14
-langchain-core==0.3.29
-langchain-community==0.3.14
-langchain-text-splitters==0.3.5
-langchain-mistralai==0.2.4
-langchain-google-genai==2.0.8
-langchain-chroma==0.2.0
+langchain==1.4.0
+langchain-core==1.6.3
+langchain-community==0.4.2
+langchain-text-splitters==1.1.2
+langchain-google-genai==4.4.0
+langchain-chroma==0.2.3
 
 # ---- rag ----
 # chromadb 0.4.x is pure Python (no C++ build). 0.5.x requires hnswlib which fails on Vercel.
 chromadb==0.4.24
-pypdf==5.1.0
-numpy==2.2.1
+pypdf==6.19.0
+numpy>=1.26.2,<2.0.0
 
 # ---- google embeddings (avoids 80MB sentence-transformers download on cold start) ----
-google-generativeai>=0.8.0
+google-generativeai==0.8.6
