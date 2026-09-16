@@ -2,7 +2,12 @@
 name = "ai-voice-interview-platform"
 version = "1.0.0"
 description = "Resume + JD aware adaptive AI interviewer with three-signal answer scoring"
-requires-python = ">=3.10"
+# Pinned to 3.12 on purpose. uv resolves for EVERY Python version this range
+# allows, not just the one being built with. On 3.13+, langchain-chroma pulls
+# numpy>=2.1, which breaks the numpy<2 pin that chroma-hnswlib 0.7.3 needs -
+# so an unbounded range makes the lock unsolvable even when the build itself
+# is running 3.12.
+requires-python = ">=3.12,<3.13"
 dependencies = [
     "fastapi==0.141.1",
     "uvicorn[standard]==0.53.0",

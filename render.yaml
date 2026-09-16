@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: prep-ai-backend
+    runtime: python
+    region: oregon
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn backend.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.0
+      - key: LLM_PROVIDER
+        sync: false
+      - key: GOOGLE_API_KEY
+        sync: false
+      - key: EMBEDDING_PROVIDER
+        sync: false
+      - key: GOOGLE_MODEL
+        value: gemini-2.0-flash
+      - key: GOOGLE_EMBEDDING_MODEL
+        value: models/text-embedding-004
+      - key: TEMPERATURE
+        value: "0.4"
+      - key: MAX_QUESTIONS
+        value: "8"
+      - key: VERCEL
+        value: "1"
