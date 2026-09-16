@@ -5,7 +5,7 @@ python-multipart==0.0.20
 pydantic==2.10.4
 python-dotenv==1.0.1
 
-# ---- langchain (cloud providers only, no ollama/huggingface local models) ----
+# ---- langchain (cloud providers only, no local/ollama) ----
 langchain==0.3.14
 langchain-core==0.3.29
 langchain-community==0.3.14
@@ -14,11 +14,10 @@ langchain-mistralai==0.2.4
 langchain-google-genai==2.0.8
 langchain-chroma==0.2.0
 
-# ---- rag ----
-# chromadb 0.4.x is pure Python (no C++ build). 0.5.x requires hnswlib which fails on Vercel.
+# ---- rag (use chromadb 0.4.x - pure Python, no C++ build needed) ----
 chromadb==0.4.24
 pypdf==5.1.0
 numpy==2.2.1
 
-# ---- google embeddings (avoids 80MB sentence-transformers download on cold start) ----
+# ---- google embeddings (no local sentence-transformers needed) ----
 google-generativeai>=0.8.0
